@@ -1,45 +1,46 @@
 // Design System Constants for GGong DDon
 
 export const COLORS = {
-  // Core Brand Colors - Professional Green-Black Theme
-  green: {
-    primary: '#00C73C',      // Toss-like green
-    secondary: '#00E647',
-    light: '#E8F9EF',
-    dark: '#00A032',
-    gradient: 'linear-gradient(135deg, #00C73C 0%, #00E647 100%)',
+  // Core Brand Colors - Neon Green Theme (Toss Style)
+  neonGreen: {
+    primary: '#B8FF00',      // Signature neon green
+    secondary: '#D9FF66',    // Light neon green
+    light: '#E3FFA3',        // Ultra light
+    dark: '#9FE600',         // Dark neon
+    gradient: 'linear-gradient(135deg, #B8FF00 0%, #E3FFA3 100%)',
+    glow: 'rgba(184, 255, 0, 0.35)',
   },
   black: {
-    primary: '#191F28',      // Deep professional black
-    secondary: '#333D4B',    // Medium black
-    tertiary: '#4E5968',     // Light black
+    primary: '#0A0A0A',      // Pure black
+    secondary: '#1A1A1A',    // Soft black
+    tertiary: '#2B2B2B',     // Gray black
     point: '#0A0A0A',
     dark: '#2B2B2B',
   },
   white: {
     bg: '#FFFFFF',
-    section: '#F9FAFB',
-    card: '#FEFEFE',
+    section: '#FAFBFC',
+    card: '#FFFFFF',
   },
   gray: {
-    50: '#F9FAFB',
-    100: '#F2F4F6',
-    200: '#E5E8EB',
-    300: '#D1D6DB',
-    400: '#B0B8C1',
-    500: '#8B95A1',
-    600: '#6B7684',
-    700: '#4E5968',
-    800: '#333D4B',
-    900: '#191F28',
+    50: '#FAFBFC',
+    100: '#F4F5F7',
+    200: '#E8EAED',
+    300: '#D3D6DB',
+    400: '#B8BCC4',
+    500: '#9499A3',
+    600: '#6E7582',
+    700: '#4A5060',
+    800: '#2B2B2B',
+    900: '#1A1A1A',
   },
   success: {
-    bg: '#E8F9EF',
-    text: '#00A032',
+    bg: '#E8FFE0',
+    text: '#145E22',
   },
   warning: {
-    bg: '#FFF7E6',
-    text: '#FF8A00',
+    bg: '#FFF7D6',
+    text: '#7A5A00',
   },
 } as const;
 

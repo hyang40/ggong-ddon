@@ -57,22 +57,27 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
               {!isSubmitted ? (
                 <>
                   {/* Header */}
-                  <div className="relative bg-gradient-to-br from-[#00C73C] to-[#00E647] p-8 pb-12">
+                  <div className="relative bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#0A0A0A] p-8 pb-12">
+                    {/* Neon Glow Background Effect */}
+                    <div className="absolute inset-0 opacity-20">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#B8FF00] blur-[100px]" />
+                    </div>
+                    
                     <button
                       onClick={onClose}
-                      className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white/20 hover:bg-white/30 rounded-full transition-colors"
+                      className="absolute top-4 right-4 w-11 h-11 flex items-center justify-center bg-white/10 hover:bg-[#B8FF00]/20 rounded-full transition-colors backdrop-blur-sm z-10"
                     >
-                      <X className="w-5 h-5 text-white" />
+                      <X className="w-6 h-6 text-white" />
                     </button>
 
-                    <div className="text-center space-y-3">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-2 shadow-lg">
-                        <span className="text-3xl transform rotate-90 text-[#00C73C]">∞</span>
+                    <div className="relative text-center space-y-4 z-10">
+                      <div className="inline-flex items-center justify-center w-20 h-20 bg-[#B8FF00] rounded-full mb-2 shadow-[0_0_30px_rgba(184,255,0,0.5)]">
+                        <span className="text-4xl transform rotate-90 text-[#0A0A0A] font-black">∞</span>
                       </div>
-                      <h2 className="text-3xl font-bold text-white">
+                      <h2 className="text-4xl font-black text-white">
                         사전 신청하기
                       </h2>
-                      <p className="text-white/90">
+                      <p className="text-[#D1D5DB] text-lg">
                         출시 알림과 특별 혜택을 가장 먼저 받아보세요
                       </p>
                     </div>
@@ -142,22 +147,22 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", duration: 0.6 }}
-                    className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#00C73C] to-[#00E647] rounded-full shadow-2xl"
+                    className="inline-flex items-center justify-center w-28 h-28 bg-[#B8FF00] rounded-full shadow-[0_0_40px_rgba(184,255,0,0.5)]"
                   >
-                    <Sparkles className="w-12 h-12 text-white" />
+                    <Sparkles className="w-14 h-14 text-[#0A0A0A]" />
                   </motion.div>
 
                   <div className="space-y-4">
-                    <h3 className="text-3xl font-bold text-[#191F28]">
+                    <h3 className="text-4xl font-black text-[#0A0A0A]">
                       신청 완료! 🎉
                     </h3>
-                    <p className="text-[#4E5968] text-lg leading-relaxed">
-                      <span className="font-bold text-[#191F28]">{email}</span>로<br />
+                    <p className="text-[#4A5060] text-lg leading-relaxed">
+                      <span className="font-black text-[#0A0A0A]">{email}</span>로<br />
                       출시 소식을 보내드릴게요
                     </p>
                   </div>
 
-                  <div className="bg-[#E8F9EF] text-[#00A032] px-6 py-4 rounded-2xl text-sm font-bold">
+                  <div className="bg-[#E3FFA3] text-[#0A0A0A] px-6 py-4 rounded-2xl text-base font-bold shadow-sm">
                     잠시 후 자동으로 닫힙니다...
                   </div>
                 </div>

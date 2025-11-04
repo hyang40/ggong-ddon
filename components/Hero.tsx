@@ -11,9 +11,12 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
-      {/* Subtle Green Gradient Background */}
+      {/* Neon Green Radial Gradient Background */}
+      <div className="absolute inset-0 opacity-[0.05]">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full bg-[#B8FF00] blur-[180px]" />
+      </div>
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full bg-[#00C73C] blur-[150px]" />
+        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] rounded-full bg-[#D9FF66] blur-[150px]" />
       </div>
 
       <div className="relative w-full max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-20 md:py-32">
@@ -27,26 +30,26 @@ export default function Hero() {
           >
             {/* Logo */}
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="text-3xl font-bold">
-                <span className="inline-block transform rotate-90 text-[#00C73C]">∞</span>
+              <div className="text-4xl font-bold">
+                <span className="inline-block transform rotate-90 text-[#B8FF00] drop-shadow-[0_0_8px_rgba(184,255,0,0.5)]">∞</span>
               </div>
-              <span className="text-2xl font-bold text-[#191F28]">
-                GGong DDon <span className="text-[#6B7684] font-medium text-base ml-1">(꽁돈)</span>
+              <span className="text-2xl font-bold text-[#0A0A0A]">
+                GGong DDon <span className="text-[#9499A3] font-normal text-base ml-1">(꽁돈)</span>
               </span>
             </div>
 
             {/* Headline */}
             <div className="space-y-6">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#191F28] leading-[1.1] tracking-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-[#0A0A0A] leading-[1.05] tracking-tighter">
                 {COPY.hero.headline1}
               </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#333D4B] leading-snug">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2B2B2B] leading-tight">
                 {COPY.hero.headline2}
               </h2>
             </div>
 
             {/* Subheadline */}
-            <p className="text-lg md:text-xl text-[#6B7684] leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-[#4A5060] leading-relaxed max-w-2xl mx-auto lg:mx-0">
               {COPY.hero.subheadline}
             </p>
 
@@ -54,20 +57,20 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <motion.button
                 onClick={() => setIsModalOpen(true)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group px-10 py-5 bg-[#00C73C] text-white font-bold rounded-2xl hover:bg-[#00E647] transition-all duration-200 flex items-center justify-center gap-3 shadow-[0_4px_20px_rgba(0,199,60,0.25)] hover:shadow-[0_8px_30px_rgba(0,199,60,0.35)]"
+                whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(184, 255, 0, 0.4)" }}
+                whileTap={{ scale: 0.97 }}
+                className="group px-10 py-5 bg-[#B8FF00] text-[#0A0A0A] font-black rounded-2xl hover:bg-[#D9FF66] transition-all duration-200 flex items-center justify-center gap-3 shadow-[0_6px_24px_rgba(184,255,0,0.3)] text-lg"
               >
                 {COPY.hero.ctaPrimary}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="group px-10 py-5 bg-[#F9FAFB] border-2 border-[#E5E8EB] text-[#191F28] font-bold rounded-2xl hover:bg-white hover:border-[#00C73C] transition-all duration-200 flex items-center justify-center gap-3"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="group px-10 py-5 bg-white border-2 border-[#E8EAED] text-[#0A0A0A] font-black rounded-2xl hover:border-[#B8FF00] hover:bg-[#FAFBFC] transition-all duration-200 flex items-center justify-center gap-3 shadow-lg text-lg"
               >
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <Play className="w-6 h-6 group-hover:scale-125 transition-transform" />
                 {COPY.hero.ctaSecondary}
               </motion.button>
             </div>
@@ -86,14 +89,14 @@ export default function Hero() {
                 {[1, 2, 3, 4].map((i) => (
                   <div
                     key={i}
-                    className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00C73C] to-[#00E647] border-3 border-white flex items-center justify-center text-white text-sm font-bold shadow-md"
+                    className="w-14 h-14 rounded-full bg-gradient-to-br from-[#B8FF00] to-[#E3FFA3] border-4 border-white flex items-center justify-center text-[#0A0A0A] text-sm font-black shadow-lg"
                   >
                     {i}
                   </div>
                 ))}
               </div>
-              <div className="text-base text-[#6B7684]">
-                <span className="font-bold text-[#191F28]">2,430+</span> 사전 신청
+              <div className="text-lg text-[#4A5060]">
+                <span className="font-black text-[#0A0A0A] text-xl">2,430+</span> 사전 신청
               </div>
             </motion.div>
           </motion.div>

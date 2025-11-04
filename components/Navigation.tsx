@@ -47,21 +47,21 @@ export default function Navigation() {
         style={{ backgroundColor, backdropFilter: backdropBlur }}
         className="fixed top-0 left-0 right-0 z-50 border-b border-transparent"
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-8 lg:px-12 py-4 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <div className="text-2xl font-bold">
-              <span className="inline-block transform rotate-90 text-[#00C73C] group-hover:scale-110 transition-transform">
+              <span className="inline-block transform rotate-90 text-[#B8FF00] group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(184,255,0,0.6)] transition-all">
                 ∞
               </span>
             </div>
-            <span className="text-xl font-bold text-[#191F28]">
+            <span className="text-xl font-black text-[#0A0A0A]">
               GGong DDon
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
               <a
                 key={item.href}
@@ -70,15 +70,15 @@ export default function Navigation() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-[#4E5968] hover:text-[#00C73C] font-semibold transition-colors"
+                className="px-5 py-2.5 text-[#6B7280] hover:text-[#0A0A0A] hover:bg-[#F5F5F5] font-bold rounded-xl transition-all"
               >
                 {item.label}
               </a>
             ))}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 8px 28px rgba(184, 255, 0, 0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-[#00C73C] text-white font-bold rounded-xl hover:bg-[#00E647] transition-colors shadow-md"
+              className="px-7 py-3.5 bg-[#B8FF00] text-[#0A0A0A] font-black rounded-xl hover:bg-[#D9FF66] transition-all shadow-[0_4px_16px_rgba(184,255,0,0.3)] ml-2"
             >
               사전 신청
             </motion.button>
@@ -87,10 +87,10 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-10 h-10 flex items-center justify-center text-[#191F28] hover:bg-[#F9FAFB] rounded-xl transition-colors"
+            className="md:hidden w-11 h-11 flex items-center justify-center text-[#0A0A0A] hover:bg-[#F5F5F5] rounded-xl transition-colors"
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
           </button>
         </div>
       </motion.nav>
@@ -104,7 +104,7 @@ export default function Navigation() {
           transition={{ duration: 0.3 }}
           className="fixed inset-0 z-40 bg-white md:hidden"
         >
-          <div className="pt-20 px-6 space-y-6">
+          <div className="pt-20 px-6 space-y-4">
             {navItems.map((item, i) => (
               <motion.a
                 key={item.href}
@@ -116,7 +116,7 @@ export default function Navigation() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="block text-2xl font-bold text-[#191F28] hover:text-[#00C73C] transition-colors"
+                className="block text-2xl font-black text-[#0A0A0A] hover:text-[#B8FF00] transition-colors"
               >
                 {item.label}
               </motion.a>
@@ -125,7 +125,7 @@ export default function Navigation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="w-full py-4 bg-[#00C73C] text-white font-bold rounded-2xl hover:bg-[#00E647] transition-colors"
+              className="w-full py-5 bg-[#B8FF00] text-[#0A0A0A] font-black text-lg rounded-2xl hover:bg-[#D9FF66] transition-all shadow-lg"
             >
               사전 신청하기
             </motion.button>
