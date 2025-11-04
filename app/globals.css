@@ -1,5 +1,166 @@
 @import "tailwindcss";
 
+@theme {
+  /* Neon Green Brand Colors */
+  --color-neon-green: #b8ff00;
+  --color-neon-green-secondary: #d9ff66;
+  --color-neon-green-light: #e3ffa3;
+
+  /* Black & Dark */
+  --color-black-point: #0a0a0a;
+  --color-black-dark: #2b2b2b;
+
+  /* White & Backgrounds */
+  --color-white-bg: #ffffff;
+  --color-white-section: #f7f9fb;
+
+  /* Success & Warning */
+  --color-success-bg: #e8ffe0;
+  --color-success-text: #145e22;
+  --color-warning-bg: #fff7d6;
+  --color-warning-text: #7a5a00;
+
+  /* Font Families */
+  --font-family-sans: 'Inter', 'Pretendard', system-ui, -apple-system, sans-serif;
+
+  /* Typography Scale (Mobile-first) */
+  --font-size-h1: 2.25rem; /* 36px */
+  --line-height-h1: 2.75rem; /* 44px */
+  
+  --font-size-h2: 1.75rem; /* 28px */
+  --line-height-h2: 2.25rem; /* 36px */
+  
+  --font-size-h3: 1.375rem; /* 22px */
+  --line-height-h3: 1.875rem; /* 30px */
+  
+  --font-size-body: 1rem; /* 16px */
+  --line-height-body: 1.625rem; /* 26px */
+  
+  --font-size-caption: 0.8125rem; /* 13px */
+  --line-height-caption: 1.25rem; /* 20px */
+
+  /* Animation Durations */
+  --animation-duration-fast: 200ms;
+  --animation-duration-normal: 600ms;
+  --animation-duration-slow: 900ms;
+
+  /* Custom Animations */
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(184, 255, 0, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(184, 255, 0, 0.5);
+    }
+  }
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-sans);
+  background-color: var(--color-white-bg);
+  color: var(--color-black-dark);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--color-black-point);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+}
+
+/* Focus Ring - Neon Green */
+*:focus-visible {
+  outline: 2px solid var(--color-neon-green);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-white-section);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neon-green-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-green);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-neon-green);
+  color: var(--color-black-point);
+}
+
+/* Animation Classes */
+.animate-fade-up {
+  animation: fade-up var(--animation-duration-fast) ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Desktop Typography Scale */
+@media (min-width: 768px) {
+  :root {
+    --font-size-h1: 3.5rem; /* 56px */
+    --line-height-h1: 4rem; /* 64px */
+    
+    --font-size-h2: 2.5rem; /* 40px */
+    --line-height-h2: 3rem; /* 48px */
+    
+    --font-size-h3: 1.875rem; /* 30px */
+    --line-height-h3: 2.5rem; /* 40px */
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
