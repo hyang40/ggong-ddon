@@ -49,13 +49,13 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#" className="flex items-center gap-3 group">
             <div className="text-2xl font-bold">
-              <span className="inline-block transform rotate-90 text-[#B8FF00] group-hover:scale-110 transition-transform">
+              <span className="inline-block transform rotate-90 text-[#00C73C] group-hover:scale-110 transition-transform">
                 ∞
               </span>
             </div>
-            <span className="text-lg font-bold text-[#0A0A0A]">
+            <span className="text-xl font-bold text-[#191F28]">
               GGong DDon
             </span>
           </a>
@@ -70,7 +70,7 @@ export default function Navigation() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-[#2B2B2B] hover:text-[#B8FF00] font-medium transition-colors"
+                className="text-[#4E5968] hover:text-[#00C73C] font-semibold transition-colors"
               >
                 {item.label}
               </a>
@@ -78,7 +78,7 @@ export default function Navigation() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-2 bg-[#B8FF00] text-[#0A0A0A] font-semibold rounded-lg hover:bg-[#D9FF66] transition-colors"
+              className="px-6 py-3 bg-[#00C73C] text-white font-bold rounded-xl hover:bg-[#00E647] transition-colors shadow-md"
             >
               사전 신청
             </motion.button>
@@ -87,7 +87,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden w-10 h-10 flex items-center justify-center text-[#0A0A0A] hover:bg-[#F7F9FB] rounded-lg transition-colors"
+            className="md:hidden w-10 h-10 flex items-center justify-center text-[#191F28] hover:bg-[#F9FAFB] rounded-xl transition-colors"
             aria-label="Toggle menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -116,7 +116,7 @@ export default function Navigation() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="block text-2xl font-bold text-[#0A0A0A] hover:text-[#B8FF00] transition-colors"
+                className="block text-2xl font-bold text-[#191F28] hover:text-[#00C73C] transition-colors"
               >
                 {item.label}
               </motion.a>
@@ -125,7 +125,7 @@ export default function Navigation() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="w-full py-4 bg-[#B8FF00] text-[#0A0A0A] font-semibold rounded-xl"
+              className="w-full py-4 bg-[#00C73C] text-white font-bold rounded-2xl hover:bg-[#00E647] transition-colors"
             >
               사전 신청하기
             </motion.button>

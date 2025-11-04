@@ -1,24 +1,40 @@
 @import "tailwindcss";
 
 @theme {
-  /* Neon Green Brand Colors */
-  --color-neon-green: #b8ff00;
-  --color-neon-green-secondary: #d9ff66;
-  --color-neon-green-light: #e3ffa3;
+  /* Professional Green-Black Theme */
+  --color-green-primary: #00c73c;
+  --color-green-secondary: #00e647;
+  --color-green-light: #e8f9ef;
+  --color-green-dark: #00a032;
 
   /* Black & Dark */
+  --color-black-primary: #191f28;
+  --color-black-secondary: #333d4b;
+  --color-black-tertiary: #4e5968;
   --color-black-point: #0a0a0a;
-  --color-black-dark: #2b2b2b;
 
   /* White & Backgrounds */
   --color-white-bg: #ffffff;
-  --color-white-section: #f7f9fb;
+  --color-white-section: #f9fafb;
+  --color-white-card: #fefefe;
 
   /* Success & Warning */
-  --color-success-bg: #e8ffe0;
-  --color-success-text: #145e22;
-  --color-warning-bg: #fff7d6;
-  --color-warning-text: #7a5a00;
+  --color-success-bg: #e8f9ef;
+  --color-success-text: #00a032;
+  --color-warning-bg: #fff7e6;
+  --color-warning-text: #ff8a00;
+  
+  /* Gray Scale */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f2f4f6;
+  --color-gray-200: #e5e8eb;
+  --color-gray-300: #d1d6db;
+  --color-gray-400: #b0b8c1;
+  --color-gray-500: #8b95a1;
+  --color-gray-600: #6b7684;
+  --color-gray-700: #4e5968;
+  --color-gray-800: #333d4b;
+  --color-gray-900: #191f28;
 
   /* Font Families */
   --font-family-sans: 'Inter', 'Pretendard', system-ui, -apple-system, sans-serif;
@@ -80,7 +96,7 @@ html {
 body {
   font-family: var(--font-family-sans);
   background-color: var(--color-white-bg);
-  color: var(--color-black-dark);
+  color: var(--color-black-secondary);
   font-size: var(--font-size-body);
   line-height: var(--line-height-body);
   -webkit-font-smoothing: antialiased;
@@ -89,7 +105,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  color: var(--color-black-point);
+  color: var(--color-black-primary);
+  letter-spacing: -0.02em;
 }
 
 h1 {
@@ -107,9 +124,9 @@ h3 {
   line-height: var(--line-height-h3);
 }
 
-/* Focus Ring - Neon Green */
+/* Focus Ring - Green */
 *:focus-visible {
-  outline: 2px solid var(--color-neon-green);
+  outline: 2px solid var(--color-green-primary);
   outline-offset: 2px;
 }
 
@@ -124,18 +141,18 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-neon-green-secondary);
+  background: var(--color-gray-400);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-neon-green);
+  background: var(--color-green-primary);
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--color-neon-green);
-  color: var(--color-black-point);
+  background-color: var(--color-green-light);
+  color: var(--color-black-primary);
 }
 
 /* Animation Classes */

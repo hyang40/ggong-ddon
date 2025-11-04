@@ -57,22 +57,22 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
               {!isSubmitted ? (
                 <>
                   {/* Header */}
-                  <div className="relative bg-gradient-to-br from-[#B8FF00] to-[#D9FF66] p-8 pb-12">
+                  <div className="relative bg-gradient-to-br from-[#00C73C] to-[#00E647] p-8 pb-12">
                     <button
                       onClick={onClose}
-                      className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-[#0A0A0A]/10 hover:bg-[#0A0A0A]/20 rounded-full transition-colors"
+                      className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white/20 hover:bg-white/30 rounded-full transition-colors"
                     >
-                      <X className="w-5 h-5 text-[#0A0A0A]" />
+                      <X className="w-5 h-5 text-white" />
                     </button>
 
                     <div className="text-center space-y-3">
-                      <div className="inline-flex items-center justify-center w-16 h-16 bg-[#0A0A0A] rounded-full mb-2">
-                        <span className="text-3xl transform rotate-90 text-[#B8FF00]">∞</span>
+                      <div className="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-2 shadow-lg">
+                        <span className="text-3xl transform rotate-90 text-[#00C73C]">∞</span>
                       </div>
-                      <h2 className="text-3xl font-bold text-[#0A0A0A]">
+                      <h2 className="text-3xl font-bold text-white">
                         사전 신청하기
                       </h2>
-                      <p className="text-[#2B2B2B]">
+                      <p className="text-white/90">
                         출시 알림과 특별 혜택을 가장 먼저 받아보세요
                       </p>
                     </div>
@@ -142,22 +142,22 @@ export default function SignupModal({ isOpen, onClose }: SignupModalProps) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", duration: 0.6 }}
-                    className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#B8FF00] to-[#D9FF66] rounded-full"
+                    className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#00C73C] to-[#00E647] rounded-full shadow-2xl"
                   >
-                    <Sparkles className="w-10 h-10 text-[#0A0A0A]" />
+                    <Sparkles className="w-12 h-12 text-white" />
                   </motion.div>
 
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-[#0A0A0A]">
+                  <div className="space-y-4">
+                    <h3 className="text-3xl font-bold text-[#191F28]">
                       신청 완료! 🎉
                     </h3>
-                    <p className="text-[#2B2B2B]">
-                      <span className="font-semibold text-[#0A0A0A]">{email}</span>로<br />
+                    <p className="text-[#4E5968] text-lg leading-relaxed">
+                      <span className="font-bold text-[#191F28]">{email}</span>로<br />
                       출시 소식을 보내드릴게요
                     </p>
                   </div>
 
-                  <div className="bg-[#E8FFE0] text-[#145E22] px-4 py-3 rounded-xl text-sm font-medium">
+                  <div className="bg-[#E8F9EF] text-[#00A032] px-6 py-4 rounded-2xl text-sm font-bold">
                     잠시 후 자동으로 닫힙니다...
                   </div>
                 </div>
