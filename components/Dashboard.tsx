@@ -1,231 +1,129 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { useRef, useEffect } from "react";
-import { COPY, DUMMY_DATA } from "@/lib/constants";
-import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
-import { TrendingUp, Calendar, Target, Heart } from "lucide-react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect } from "react";
+import { COPY, CHART_DATA } from "@/lib/constants";
+import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 
-function Counter({ value, prefix = "", suffix = "" }: { value: number; prefix?: string; suffix?: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+function Counter({ value, duration = 1 }: { value: number; duration?: number }) {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
   useEffect(() => {
-    if (isInView) {
-      const controls = animate(count, value, { duration: 0.9 });
-      return controls.stop;
-    }
-  }, [isInView, count, value]);
+    const controls = animate(count, value, { duration });
+    return controls.stop;
+  }, [count, value, duration]);
 
-  return (
-    <motion.span ref={ref}>
-      {prefix}
-      {rounded.get().toLocaleString()}
-      {suffix}
-    </motion.span>
-  );
+  return <motion.span>{rounded}</motion.span>;
 }
 
-const KPICard = ({ 
-  icon: Icon, 
-  label, 
-  value, 
-  prefix = "", 
-  suffix = "",
-  color = "neon",
-  index 
-}: { 
-  icon: any; 
-  label: string; 
-  value: number; 
-  prefix?: string; 
-  suffix?: string;
-  color?: "neon" | "success" | "blue";
-  index: number;
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-
-  const colorClasses = {
-    neon: "from-[#B8FF00] to-[#D9FF66]",
-    success: "from-[#145E22] to-[#2A8B3E]",
-    blue: "from-[#0066FF] to-[#4D94FF]",
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-white border-2 border-[#F7F9FB] rounded-2xl p-6 hover:border-[#B8FF00] transition-all duration-300 hover:shadow-lg"
-    >
-      <div className={`inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br ${colorClasses[color]} rounded-xl mb-4`}>
-        <Icon className="w-6 h-6 text-white" />
-      </div>
-      <div className="text-sm text-[#2B2B2B] mb-2">{label}</div>
-      <div className="text-3xl md:text-4xl font-bold text-[#0A0A0A]">
-        <Counter value={value} prefix={prefix} suffix={suffix} />
-      </div>
-    </motion.div>
-  );
-};
-
 export default function Dashboard() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="py-20 md:py-32 bg-gradient-to-b from-white to-[#F7F9FB]">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Title */}
+    <section className="relative py-32 bg-[#fafbfc] overflow-hidden">
+      {/* 배경 데코 */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute top-10 right-10 w-96 h-96 bg-[#a78bfa] rounded-full blur-3xl" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#6ee7b7] rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-8 md:px-12 lg:px-16 relative">
+        {/* 헤더 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center space-y-4 mb-16"
         >
-          <div className="inline-block bg-[#B8FF00] text-[#0A0A0A] px-4 py-2 rounded-full text-sm font-semibold mb-6">
-            Dashboard
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#0A0A0A] mb-4">
+          <h2 className="text-4xl md:text-5xl font-black text-[#0a0a0a]">
             {COPY.dashboard.title}
           </h2>
-          <p className="text-lg text-[#2B2B2B] max-w-2xl mx-auto">
-            한눈에 보는 나의 '꽁돈' 성장 스토리
-          </p>
+          <p className="text-xl text-[#6b7280]">{COPY.dashboard.subtitle}</p>
         </motion.div>
 
-        {/* Main Dashboard */}
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          {/* KPI Cards */}
-          <div className="space-y-6">
-            <KPICard
-              index={0}
-              icon={TrendingUp}
-              label={COPY.dashboard.metrics.totalSaved}
-              value={DUMMY_DATA.kpis.totalSaved}
-              prefix="₩"
-              color="neon"
-            />
-            <KPICard
-              index={1}
-              icon={Calendar}
-              label={COPY.dashboard.metrics.weeklySaved}
-              value={DUMMY_DATA.kpis.weeklySaved}
-              prefix="₩"
-              color="success"
-            />
-          </div>
-
-          {/* Line Chart */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 40 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white border-2 border-[#F7F9FB] rounded-2xl p-6"
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-bold text-[#0A0A0A]">이번 주 꽁돈 추이</h3>
-              <div className="text-sm text-[#2B2B2B]">최근 7일</div>
-            </div>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={DUMMY_DATA.lineChart}>
-                <XAxis 
-                  dataKey="date" 
-                  stroke="#2B2B2B"
-                  style={{ fontSize: '12px' }}
-                />
-                <YAxis 
-                  stroke="#2B2B2B"
-                  style={{ fontSize: '12px' }}
-                  tickFormatter={(value) => `${value / 1000}k`}
-                />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#0A0A0A', 
-                    border: 'none', 
-                    borderRadius: '12px',
-                    color: '#FFFFFF'
-                  }}
-                  formatter={(value: any) => [`₩${value.toLocaleString()}`, '절약액']}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="saved" 
-                  stroke="#B8FF00" 
-                  strokeWidth={3}
-                  dot={{ fill: '#B8FF00', strokeWidth: 2, r: 4 }}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </motion.div>
+        {/* KPI 카드 */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {COPY.dashboard.kpis.map((kpi, index) => (
+            <motion.div
+              key={kpi.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-xl p-6 shadow-sm border border-[#e5e7eb]"
+            >
+              <p className="text-xs font-semibold text-[#6b7280] mb-2">{kpi.label}</p>
+              <div className="flex items-end gap-2">
+                <p className={`text-3xl font-bold ${
+                  kpi.color === 'purple' ? 'text-[#a78bfa]' :
+                  kpi.color === 'mint' ? 'text-[#6ee7b7]' :
+                  'text-[#fca5a5]'
+                }`}>
+                  <Counter value={kpi.value} />
+                </p>
+                <span className="text-base font-semibold text-[#9ca3af] mb-1">{kpi.unit}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Additional KPIs */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <KPICard
-            index={2}
-            icon={Target}
-            label={COPY.dashboard.metrics.goalAcceleration}
-            value={DUMMY_DATA.kpis.goalAcceleration}
-            suffix="일"
-            color="blue"
-          />
-          <KPICard
-            index={3}
-            icon={Heart}
-            label="챌린지 성공률"
-            value={DUMMY_DATA.kpis.challengeSuccess}
-            suffix="%"
-            color="success"
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-gradient-to-br from-[#B8FF00] to-[#D9FF66] rounded-2xl p-6 text-[#0A0A0A]"
-          >
-            <div className="text-sm font-semibold mb-2">현재 목표</div>
-            <div className="text-2xl font-bold mb-1">유럽 여행 ✈️</div>
-            <div className="text-sm opacity-80">
-              목표 금액의 <span className="font-bold">68%</span> 달성
-            </div>
-            <div className="mt-4 bg-white/30 rounded-full h-2 overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "68%" }}
-                transition={{ duration: 1, delay: 0.6 }}
-                className="h-full bg-[#0A0A0A] rounded-full"
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Praise Log */}
+        {/* 차트 */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white border-2 border-[#F7F9FB] rounded-2xl p-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-xl p-6 shadow-sm border border-[#e5e7eb] mb-12"
         >
-          <h3 className="text-lg font-bold text-[#0A0A0A] mb-4">
-            {COPY.dashboard.metrics.recentPraise}
-          </h3>
-          <div className="space-y-3">
-            {DUMMY_DATA.praiseLog.map((praise, i) => (
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-xl font-bold text-[#0a0a0a]">이번 달 꽁돈 추이</h3>
+            <div className="flex gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#a78bfa]" />
+                <span className="text-sm font-semibold text-[#6b7280]">목표</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-[#6ee7b7]" />
+                <span className="text-sm font-semibold text-[#6b7280]">실제</span>
+              </div>
+            </div>
+          </div>
+          
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={CHART_DATA.goalProgress}>
+              <XAxis dataKey="week" stroke="#9ca3af" />
+              <YAxis stroke="#9ca3af" />
+              <Tooltip 
+                contentStyle={{ 
+                  backgroundColor: '#ffffff', 
+                  border: '2px solid #e9d5ff',
+                  borderRadius: '12px',
+                  padding: '12px'
+                }}
+              />
+              <Line type="monotone" dataKey="goal" stroke="#a78bfa" strokeWidth={3} dot={{ fill: '#a78bfa', r: 6 }} />
+              <Line type="monotone" dataKey="actual" stroke="#6ee7b7" strokeWidth={3} dot={{ fill: '#6ee7b7', r: 6 }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </motion.div>
+
+        {/* 최근 칭찬 로그 */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="space-y-4"
+        >
+          <h3 className="text-2xl font-black text-[#0a0a0a] mb-6">최근 칭찬 로그</h3>
+          <div className="grid md:grid-cols-3 gap-4">
+            {COPY.dashboard.recentPraises.map((praise, index) => (
               <motion.div
-                key={i}
+                key={index}
                 initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.4, delay: 0.6 + i * 0.1 }}
-                className="flex items-center gap-3 p-3 bg-[#E8FFE0] rounded-xl"
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-gradient-to-r from-[#fef3c7] to-[#fde047] rounded-2xl p-6 shadow-lg"
               >
-                <div className="w-2 h-2 bg-[#145E22] rounded-full" />
-                <span className="text-[#145E22] font-medium">{praise}</span>
+                <p className="text-base font-bold text-[#78350f]">{praise}</p>
               </motion.div>
             ))}
           </div>

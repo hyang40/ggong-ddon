@@ -32,7 +32,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className="scroll-smooth">
       <body className={`${inter.variable} antialiased`}>
-        {children}
+        <div className="site-container">
+          {children}
+        </div>
       </body>
     </html>
   );
