@@ -131,7 +131,7 @@ export default function SavingsJournalScreen({ isOpen, onClose, goalAmount, goal
         )}
         
         {activeTab === 'journal' && (
-          <div className="pb-24">
+          <div className="pb-24 max-w-[1200px] mx-auto">
             {/* Goal Info Banner */}
             <div className="bg-white px-6 py-4 border-b border-gray-100">
               <p className="text-sm text-gray-500 mb-1">목표</p>
