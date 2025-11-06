@@ -8,16 +8,16 @@ import { useState } from "react";
 import Modal from "./Modal";
 import MotivationalPopup from "./MotivationalPopup";
 import GoalSetupScreen from "./GoalSetupScreen";
-import Step2Dashboard from "./Step2Dashboard";
+import SavingsJournalScreen from "./SavingsJournalScreen";
 import Step3ExpenseAnalysis from "./Step3ExpenseAnalysis";
 import Step4CategoryTagging from "./Step4CategoryTagging";
-import SavingsAppLayout from "./SavingsAppLayout";
 
 export default function Hero() {
   const [showMotivational, setShowMotivational] = useState(false);
   const [showGoalSetup, setShowGoalSetup] = useState(false);
-  const [showApp, setShowApp] = useState(false);
-  const [currentStep, setCurrentStep] = useState(2); // Start at 2 for dashboard
+  const [showJournal, setShowJournal] = useState(false);
+  const [showExpenseAnalysis, setShowExpenseAnalysis] = useState(false);
+  const [showCategoryTagging, setShowCategoryTagging] = useState(false);
   const [goalAmount, setGoalAmount] = useState(0);
   const [goalDescription, setGoalDescription] = useState('');
 
@@ -34,33 +34,36 @@ export default function Hero() {
     setGoalAmount(amount);
     setGoalDescription(description);
     setShowGoalSetup(false);
-    setShowApp(true);
-    setCurrentStep(2);
+    setShowJournal(true);
   };
 
-  const handleStep2Complete = () => {
-    setCurrentStep(3);
+  const handleJournalClose = () => {
+    setShowJournal(false);
   };
 
-  const handleStep3Complete = () => {
-    setCurrentStep(4);
+  const handleExpenseAnalysisClick = () => {
+    setShowJournal(false);
+    setShowExpenseAnalysis(true);
   };
 
-  const handleStep4Complete = () => {
-    setShowApp(false);
-    setCurrentStep(2);
-    // Could show a success message here
+  const handleExpenseAnalysisNext = () => {
+    setShowExpenseAnalysis(false);
+    setShowCategoryTagging(true);
   };
 
-  const handleStepBack = () => {
-    if (currentStep > 2) {
-      setCurrentStep(currentStep - 1);
-    }
+  const handleExpenseAnalysisBack = () => {
+    setShowExpenseAnalysis(false);
+    setShowJournal(true);
   };
 
-  const handleAppClose = () => {
-    setShowApp(false);
-    setCurrentStep(2);
+  const handleCategoryTaggingBack = () => {
+    setShowCategoryTagging(false);
+    setShowExpenseAnalysis(true);
+  };
+
+  const handleCategoryTaggingComplete = () => {
+    setShowCategoryTagging(false);
+    setShowJournal(true);
   };
 
   return (
@@ -214,14 +217,36 @@ export default function Hero() {
         onComplete={handleGoalSetupComplete}
       />
 
-      {/* Main App */}
-      {showApp && (
-        <Modal isOpen={showApp} onClose={handleAppClose} size="lg" showCloseButton={false}>
-          <SavingsAppLayout onClose={handleAppClose}>
-            {currentStep === 2 && <Step2Dashboard goalAmount={goalAmount} goalDescription={goalDescription} onNext={handleStep2Complete} />}
-            {currentStep === 3 && <Step3ExpenseAnalysis onNext={handleStep3Complete} onBack={handleStepBack} />}
-            {currentStep === 4 && <Step4CategoryTagging onBack={handleStepBack} onComplete={handleStep4Complete} />}
-          </SavingsAppLayout>
+      {/* Savings Journal Fullscreen */}
+      <SavingsJournalScreen
+        isOpen={showJournal}
+        onClose={handleJournalClose}
+        goalAmount={goalAmount}
+        goalDescription={goalDescription}
+        onExpenseAnalysisClick={handleExpenseAnalysisClick}
+      />
+
+      {/* Expense Analysis Fullscreen */}
+      {showExpenseAnalysis && (
+        <Modal isOpen={showExpenseAnalysis} onClose={() => setShowExpenseAnalysis(false)} size="lg" showCloseButton={false}>
+          <div className="bg-white h-[700px]">
+            <Step3ExpenseAnalysis 
+              onNext={handleExpenseAnalysisNext} 
+              onBack={handleExpenseAnalysisBack} 
+            />
+          </div>
+        </Modal>
+      )}
+
+      {/* Category Tagging Fullscreen */}
+      {showCategoryTagging && (
+        <Modal isOpen={showCategoryTagging} onClose={() => setShowCategoryTagging(false)} size="lg" showCloseButton={false}>
+          <div className="bg-gray-50 h-[700px]">
+            <Step4CategoryTagging 
+              onBack={handleCategoryTaggingBack} 
+              onComplete={handleCategoryTaggingComplete} 
+            />
+          </div>
         </Modal>
       )}
     </section>
